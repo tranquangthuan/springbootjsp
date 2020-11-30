@@ -7,7 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Home page</h1>
-	${message}
+	<div align="center">
+		<h1>Home page</h1>
+		${message}
+	</div>
 </body>
 </html>

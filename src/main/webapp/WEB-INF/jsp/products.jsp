@@ -9,33 +9,34 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Product List Page</h1>
-	<c:if test="${not empty message}">
+	<div align="center">
+		<h1>Product List Page</h1>
+		<c:if test="${not empty message}">
 		${message}
 	</c:if>
-	<form action="addnew" method="post">
-		<input type="submit" value="Add new Product">
-	</form>
-	<table border="1" style="width: 150px">
-		<tr>
-			<td>Name</td>
-			<td>Color</td>
-			<td>Quantity</td>
-			<td>Edit</td>
-			<td>Delete</td>
-		</tr>
-		<c:forEach items="${products}" var="product">
+		<form action="addnew" method="post">
+			<input type="submit" value="Add new Product">
+		</form>
+		<table border="1" style="width: 700px; text-align: center;">
 			<tr>
-				<td>${product.name}</td>
-				<td>${product.color}</td>
-				<td>${product.quantity}</td>
-				<td><a href="edit/${product.id}">Edit</a></td>
-				<td><a href="delete/${product.id}">Delete</a></td>
+				<td>Name</td>
+				<td>Color</td>
+				<td>Quantity</td>
+				<td>Edit</td>
+				<td>Delete</td>
 			</tr>
-		</c:forEach>
-	</table>
+			<c:forEach items="${products}" var="product">
+				<tr>
+					<td>${product.name}</td>
+					<td>${product.color}</td>
+					<td>${product.quantity}</td>
+					<td><a href="edit/${product.id}">Edit</a></td>
+					<td><a href="delete/${product.id}">Delete</a></td>
+				</tr>
+			</c:forEach>
+		</table>
 
-
+	</div>
 
 </body>
 </html>

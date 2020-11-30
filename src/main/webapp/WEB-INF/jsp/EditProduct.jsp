@@ -10,32 +10,33 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Update Product</h1>
-	<form:form method="POST" action="/product/save"
-		modelAttribute="product">
-		<table>
-			<tr>
-				<td>Name</td>
-				<td><form:input path="name" /></td>
-			</tr>
+	<div align="center">
+		<h1>Update Product</h1>
+		<form:form method="POST" action="/product/save"
+			modelAttribute="product">
+			<table>
+				<tr>
+					<td>Name</td>
+					<td><form:input path="name" /></td>
+				</tr>
 
-			<tr>
-				<td>Color</td>
-				<td><form:input path="color" /></td>
-			</tr>
+				<tr>
+					<td>Color</td>
+					<td><form:input path="color" /></td>
+				</tr>
 
-			<tr>
-				<td>Quantity</td>
-				<td><form:input path="quantity" /></td>
-			</tr>
+				<tr>
+					<td>Quantity</td>
+					<td><form:input path="quantity" /></td>
+				</tr>
 
-			<tr>
-				<td><input type="submit" value="Update"></td>
-			</tr>
-		</table>
-		<form:hidden path="id" />
-	</form:form>
-
+				<tr>
+					<td><input type="submit" value="Update"></td>
+				</tr>
+			</table>
+			<form:hidden path="id" />
+		</form:form>
+	</div>
 
 </body>
 </html>
