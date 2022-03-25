@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,8 +11,8 @@
 	<div align="center">
 		<h1>Product List Page</h1>
 		<c:if test="${not empty message}">
-		${message}
-	</c:if>
+		${message}<br>
+		</c:if>
 		<a href="/product/addnew">Add new Product</a>
 		<table border="1" style="width: 700px; text-align: center;">
 			<tr>
@@ -28,8 +27,8 @@
 					<td>${product.name}</td>
 					<td>${product.color}</td>
 					<td>${product.quantity}</td>
-					<td><a href="edit/${product.id}">Edit</a></td>
-					<td><a href="delete/${product.id}">Delete</a></td>
+					<td><a href="/product/edit/${product.id}">Edit</a></td>
+					<td><a href="/product/delete/${product.id}">Delete</a></td>
 				</tr>
 			</c:forEach>
 		</table>

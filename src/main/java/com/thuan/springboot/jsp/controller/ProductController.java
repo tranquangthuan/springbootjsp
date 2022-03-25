@@ -23,7 +23,7 @@ public class ProductController {
 	@Autowired
 	private ProductServiceImpl productServiceImpl;
 
-	@GetMapping(value = "/all")
+	@GetMapping()
 	public String getAll(Model model) {
 
 		List<Product> products = productServiceImpl.getProducts();
@@ -52,7 +52,7 @@ public class ProductController {
 	public String update(@ModelAttribute("product") Product product) {
 
 		productServiceImpl.save(product);
-		return "redirect:/product/all";
+		return "redirect:/product";
 	}
 
 	@RequestMapping(value = "/addnew", method = RequestMethod.GET)
@@ -66,6 +66,6 @@ public class ProductController {
 		System.out.println("id = " + id);
 		productServiceImpl.deleteById(id);
 
-		return "redirect:/product/all";
+		return "redirect:/product";
 	}
 }
