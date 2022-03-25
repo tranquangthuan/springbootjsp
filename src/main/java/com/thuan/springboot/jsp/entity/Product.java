@@ -1,5 +1,6 @@
 package com.thuan.springboot.jsp.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,8 +13,10 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(name = "name", columnDefinition = "nvarchar(500)", nullable = false)
 	private String name;
 
+	@Column(name = "color", columnDefinition = "nvarchar(100)", nullable = false)
 	private String color;
 
 	private int quantity;
