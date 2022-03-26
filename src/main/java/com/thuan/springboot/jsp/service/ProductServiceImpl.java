@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.thuan.springboot.jsp.entity.Product;
@@ -33,6 +36,18 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void deleteById(long id) {
 		productRepository.deleteById(id);
+	}
+
+	@Override
+	public Page<Product> getProductPagination(int page, int size) {
+		Pageable pageable = PageRequest.of(page, size);
+		return productRepository.findAll(pageable);
+	}
+
+	@Override
+	public List<Product> search(String name) {
+		// TODO Auto-generated method stub
+		return productRepository.findByNameContaining(name);
 	}
 
 }

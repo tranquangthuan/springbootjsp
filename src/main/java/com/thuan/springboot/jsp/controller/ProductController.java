@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.thuan.springboot.jsp.entity.Product;
 import com.thuan.springboot.jsp.service.ProductServiceImpl;
@@ -20,14 +22,29 @@ import com.thuan.springboot.jsp.service.ProductServiceImpl;
 @RequestMapping(value = "/product")
 public class ProductController {
 
+	private int pageSize = 3;
+
 	@Autowired
 	private ProductServiceImpl productServiceImpl;
 
 	@GetMapping()
-	public String getAll(Model model) {
+	public String getAll(Model model, @RequestParam(defaultValue = "1") Integer page) {
 
-		List<Product> products = productServiceImpl.getProducts();
+		// List<Product> products = productServiceImpl.getProducts();
+		Page<Product> productPagination = productServiceImpl.getProductPagination(page - 1, pageSize);
+
+		model.addAttribute("products", productPagination.toList());
+		model.addAttribute("totalPages", productPagination.getTotalPages());
+		model.addAttribute("currentPage", page);
+
+		return "products";
+	}
+
+	@GetMapping(value = "/search")
+	public String search(Model model, @RequestParam(defaultValue = "") String keySearch) {
+		List<Product> products = productServiceImpl.search(keySearch);
 		model.addAttribute("products", products);
+		//model.addAttribute("keySearch", keySearch);
 
 		return "products";
 	}
