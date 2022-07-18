@@ -6,6 +6,11 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<style type="text/css">
+.errors {
+	color: red;
+}
+</style>
 <title>Insert title here</title>
 </head>
 <body>
@@ -17,21 +22,24 @@
 				<tr>
 					<td>Name</td>
 					<td><form:input path="name" /></td>
+					<td><form:errors cssClass="errors" path="name" /></td>
 				</tr>
 
 				<tr>
 					<td>Color</td>
 					<td><form:input path="color" /></td>
+					<td><form:errors cssClass="errors" path="color" /></td>
 				</tr>
 
 				<tr>
 					<td>Quantity</td>
 					<td><form:input path="quantity" /></td>
+					<td><form:errors cssClass="errors" path="quantity" /></td>
 				</tr>
-
 				<tr>
 					<td><input type="submit" value="Add New"></td>
 				</tr>
+				<form:hidden path="id" />
 			</table>
 		</form:form>
 	</div>

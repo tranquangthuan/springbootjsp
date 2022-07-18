@@ -5,6 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Range;
 
 @Entity
 public class Product {
@@ -14,23 +18,19 @@ public class Product {
 	private Long id;
 
 	@Column(name = "name", columnDefinition = "nvarchar(500)", nullable = false)
+	@NotBlank(message = "Vui lòng nhập product name ")
 	private String name;
 
 	@Column(name = "color", columnDefinition = "nvarchar(100)", nullable = false)
+	@NotBlank(message = "Vui lòng nhập product color ")
 	private String color;
 
-	private int quantity;
+	@NotNull(message = "Vui lòng nhập quantity")
+	@Range(min = 0, max = 1000, message = "Vui lòng nhập số lượng từ 0 - 1000")
+	private Integer quantity;
 
 	public Product() {
 		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Product(String name, String color, int quantity) {
-		super();
-		this.name = name;
-		this.color = color;
-		this.quantity = quantity;
 	}
 
 	public Long getId() {
@@ -57,11 +57,11 @@ public class Product {
 		this.color = color;
 	}
 
-	public int getQuantity() {
+	public Integer getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 

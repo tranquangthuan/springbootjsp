@@ -3,10 +3,13 @@ package com.thuan.springboot.jsp.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,7 +47,7 @@ public class ProductController {
 	public String search(Model model, @RequestParam(defaultValue = "") String keySearch) {
 		List<Product> products = productServiceImpl.search(keySearch);
 		model.addAttribute("products", products);
-		//model.addAttribute("keySearch", keySearch);
+		// model.addAttribute("keySearch", keySearch);
 
 		return "products";
 	}
@@ -56,7 +59,7 @@ public class ProductController {
 		Optional<Product> editProduct = productServiceImpl.findById(id);
 		if (editProduct.isPresent()) {
 			model.addAttribute("product", editProduct.get());
-			return "EditProduct";
+			return "newProduct";
 		}
 		model.addAttribute("message", "Product not exist");
 		List<Product> products = productServiceImpl.getProducts();
@@ -66,8 +69,10 @@ public class ProductController {
 	}
 
 	@PostMapping(value = "/save")
-	public String update(@ModelAttribute("product") Product product) {
-
+	public String update(@ModelAttribute("product") @Valid Product product, BindingResult result) {
+		if (result.hasErrors()) {
+			return "newProduct";
+		}
 		productServiceImpl.save(product);
 		return "redirect:/product";
 	}
@@ -75,7 +80,7 @@ public class ProductController {
 	@RequestMapping(value = "/addnew", method = RequestMethod.GET)
 	public String addNew(Model model) {
 		model.addAttribute("product", new Product());
-		return "NewProduct";
+		return "newProduct";
 	}
 
 	@GetMapping(value = "/delete/{id}")
